@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmn4pg2l7cl53"]
+
+[ext_resource type="Theme" uid="uid://cd4akw2p2l47o" path="res://scripts/globals/font_1.tres" id="1_lbo74"]
+[ext_resource type="Script" uid="uid://bdglqp5tsuykx" path="res://scenes/interactive_menu/right_chat_box.gd" id="1_s8atj"]
+
+[node name="RightChatBox" type="HBoxContainer"]
+script = ExtResource("1_s8atj")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(211.38, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+color = Color(0.862745, 0.741176, 0.294118, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("1_lbo74")
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 5
+text = "¿Ah no? Yo lo escogí pensando en ti. Quería ver tu reacción... y valió la pena. "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

@@ -23,4 +23,3 @@ expand_mode = 2
 
 [node name="InteractiveMenu" parent="." instance=ExtResource("2_k2fmo")]
 layout_mode = 1
-scale = Vector2(0.919999, 1)

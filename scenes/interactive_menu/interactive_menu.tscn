@@ -1,14 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://b350hvy60n7fg"]
+[gd_scene load_steps=4 format=3 uid="uid://b350hvy60n7fg"]
 
 [ext_resource type="Script" uid="uid://b7y1doyos3u6x" path="res://scenes/interactive_menu/interactive_menu.gd" id="1_td75o"]
-[ext_resource type="Script" uid="uid://chsc62j1aii8l" path="res://scenes/interactive_menu/chat_box.gd" id="2_qh04b"]
+[ext_resource type="PackedScene" uid="uid://cjj64iwklxhso" path="res://scenes/interactive_menu/left_chat_box.tscn" id="2_4lgfe"]
+[ext_resource type="PackedScene" uid="uid://dmn4pg2l7cl53" path="res://scenes/interactive_menu/right_chat_box.tscn" id="3_h0kfy"]
 
 [node name="InteractiveMenu" type="Control"]
 layout_direction = 1
 layout_mode = 3
-anchor_left = 0.25
+anchor_left = 0.2
 anchor_top = 0.1
-anchor_right = 0.75
+anchor_right = 0.8
 anchor_bottom = 0.9
 grow_vertical = 2
 script = ExtResource("1_td75o")
@@ -22,40 +23,20 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.247691, 0.400134, 0.342889, 1)
 
-[node name="ChatApp" type="Control" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
 
-[node name="BackGround" type="ColorRect" parent="ChatApp"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.147993, 0.361077, 0.636581, 1)
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="ChatBox" type="Control" parent="ChatApp"]
-layout_mode = 1
-anchor_left = 0.05
-anchor_top = 0.1
-anchor_right = 0.5
-anchor_bottom = 0.2
-script = ExtResource("2_qh04b")
+[node name="RightChatBox" parent="ScrollContainer/VBoxContainer" instance=ExtResource("3_h0kfy")]
+layout_mode = 2
 
-[node name="BackGround" type="ColorRect" parent="ChatApp/ChatBox"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.216179, 0.209852, 0.123378, 1)
-
-[node name="Label" type="Label" parent="ChatApp/ChatBox"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="LeftChatBox" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_4lgfe")]
+layout_mode = 2

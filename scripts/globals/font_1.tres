@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cd4akw2p2l47o"]
+
+[ext_resource type="FontFile" uid="uid://drox8tuckye23" path="res://assets/fonts/Quicksand/static/Quicksand-Bold.ttf" id="1_n06lp"]
+
+[resource]
+default_font = ExtResource("1_n06lp")
+default_font_size = 20
