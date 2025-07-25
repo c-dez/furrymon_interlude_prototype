@@ -33,7 +33,7 @@
 						"siguiente":{
 							"personaje":"opciones",
 							"lineas":[
-								"esta es opcion 1", "y esta opcion 2"
+								["esta es opcion 1", "y esta opcion 2"]
 							]
 							
 						}
