@@ -1,0 +1,37 @@
+{
+	"personaje": "Caballero",
+	"lineas": [
+		"Potion seller, I’m going into battle, and I need your strongest potions."
+	],
+	"siguiente": {
+		"personaje": "Potion Seller",
+		"lineas": [
+			"You can’t handle my strongest potions, traveler.",
+			"My potions would kill a dragon, let alone a man."
+		],
+		"siguiente": {
+			"personaje": "Caballero",
+			"lineas": [
+				"Potion seller, I tell you I’m going into battle, and I need only your strongest potions."
+			],
+			"siguiente": {
+				"personaje": "Potion Seller",
+				"lineas": [
+					"You can’t handle my potions. They’re too strong for you."
+				],
+				"siguiente": {
+					"personaje": "Caballero",
+					"lineas": [
+						"Potion seller, listen to me when I say I’m going into battle and I need only your strongest potions."
+					],
+					"siguiente": {
+						"personaje": "Potion Seller",
+						"lineas": [
+							"You can’t handle my potions! They would burn your insides!"
+						]
+					}
+				}
+			}
+		}
+	}
+}
