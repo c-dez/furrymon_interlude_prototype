@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://b350hvy60n7fg"]
+
+[ext_resource type="Script" uid="uid://b7y1doyos3u6x" path="res://scenes/interactive_menu/interactive_menu.gd" id="1_td75o"]
+
+[node name="InteractiveMenu" type="Control"]
+layout_direction = 1
+layout_mode = 3
+anchor_left = 0.25
+anchor_top = 0.1
+anchor_right = 0.75
+anchor_bottom = 0.9
+grow_vertical = 2
+script = ExtResource("1_td75o")
+
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.247691, 0.400134, 0.342889, 1)
+
+[node name="ChatApp" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+
+[node name="BackGround" type="ColorRect" parent="ChatApp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.147993, 0.361077, 0.636581, 1)

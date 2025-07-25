@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwlddgg8x7ccb"]
+[gd_scene load_steps=3 format=3 uid="uid://cwlddgg8x7ccb"]
 
-[ext_resource type="Texture2D" uid="uid://2yxxnlkiqy01" path="res://assets/4k-Golden-Sunset-Over-City-Skyline-AI-Generated-4K-Wallpaper.jpg" id="1_hyk8p"]
+[ext_resource type="Texture2D" uid="uid://cif6yxm51mqxl" path="res://assets/1020739-3316-169-Aspect-Ratio-s-SFW-forest-autumn-land.png" id="1_iuonh"]
+[ext_resource type="PackedScene" uid="uid://b350hvy60n7fg" path="res://scenes/interactive_menu/interactive_menu.tscn" id="2_k2fmo"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -17,5 +18,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_hyk8p")
+texture = ExtResource("1_iuonh")
 expand_mode = 2
+
+[node name="InteractiveMenu" parent="." instance=ExtResource("2_k2fmo")]
+layout_mode = 1
+scale = Vector2(0.919999, 1)
