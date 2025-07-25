@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwlddgg8x7ccb"]
 
 [ext_resource type="Texture2D" uid="uid://cif6yxm51mqxl" path="res://assets/images/1020739-3316-169-Aspect-Ratio-s-SFW-forest-autumn-land.png" id="1_iuonh"]
-[ext_resource type="PackedScene" uid="uid://b350hvy60n7fg" path="res://scenes/interactive_menu/interactive_menu.tscn" id="2_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://b350hvy60n7fg" path="res://scenes/chat_app/chat_app.tscn" id="2_k2fmo"]
 
 [node name="Main" type="Control"]
 layout_mode = 3

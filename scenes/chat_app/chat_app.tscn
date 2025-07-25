@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://b350hvy60n7fg"]
 
-[ext_resource type="Script" uid="uid://b7y1doyos3u6x" path="res://scenes/interactive_menu/interactive_menu.gd" id="1_td75o"]
+[ext_resource type="Script" uid="uid://b7y1doyos3u6x" path="res://scenes/chat_app/chat_app.gd" id="1_td75o"]
 
-[node name="InteractiveMenu" type="Control"]
+[node name="ChatApp" type="Control"]
 layout_direction = 1
 layout_mode = 3
 anchor_left = 0.2

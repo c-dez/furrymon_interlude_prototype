@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjj64iwklxhso"]
 
-[ext_resource type="Script" uid="uid://bbwnhrgd3wtvl" path="res://scenes/interactive_menu/chat_boxes/left/left_chat_box.gd" id="1_8bx0t"]
+[ext_resource type="Script" uid="uid://bbwnhrgd3wtvl" path="res://scenes/chat_app/chat_boxes/left/left_chat_box.gd" id="1_8bx0t"]
 [ext_resource type="Theme" uid="uid://cd4akw2p2l47o" path="res://scripts/globals/font_1.tres" id="2_lxxdd"]
 
 [node name="LeftChatBox" type="HBoxContainer"]

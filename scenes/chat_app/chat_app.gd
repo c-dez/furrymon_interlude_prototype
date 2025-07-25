@@ -1,12 +1,12 @@
-class_name InteractiveMenu # no me gusta este nombre cambiarlo por algo mas descriptivo
+class_name ChatApp # no me gusta este nombre cambiarlo por algo mas descriptivo
 extends Control
 # este nodo se encarga de crear las cajas de texto, su contenido y scroll
 
 @onready var scroll_container: ScrollContainer = get_node("ScrollContainer")
 @onready var v_box: VBoxContainer = scroll_container.get_node("VBoxContainer")
 
-var left_chat: Resource = preload("res://scenes/interactive_menu/chat_boxes/left/left_chat_box.tscn")
-var right_chat: Resource = preload("res://scenes/interactive_menu/chat_boxes/right/right_chat_box.tscn")
+var left_chat: Resource = preload("res://scenes/chat_app/chat_boxes/left/left_chat_box.tscn")
+var right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/right_chat_box.tscn")
 
 var dialogo_actual = {}
 var index: int = 0
@@ -33,6 +33,7 @@ func _process(_delta: float) -> void:
 
 func imprimir_linea() -> void:
 	if dialogo_actual == null:
+		print("dialogo null")
 		return
 
 	var lineas: Array = dialogo_actual["lineas"]
@@ -40,7 +41,7 @@ func imprimir_linea() -> void:
 
 	if index < lineas.size():
 		if personaje == "Caballero":
-			var instance: LeftChatBox = left_chat.instantiate()
+			var instance: RightChatBox = right_chat.instantiate()
 			v_box.add_child(instance)
 			instance.label.text = lineas[index]
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
@@ -49,7 +50,7 @@ func imprimir_linea() -> void:
 			index += 1
 			pass
 		else:
-			var instance: RightChatBox = right_chat.instantiate()
+			var instance: LeftChatBox = left_chat.instantiate()
 			v_box.add_child(instance)
 			instance.label.text = lineas[index]
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
