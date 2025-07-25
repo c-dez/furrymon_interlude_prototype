@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwlddgg8x7ccb"]
 
-[ext_resource type="Texture2D" uid="uid://2yxxnlkiqy01" path="res://scenes/4k-Golden-Sunset-Over-City-Skyline-AI-Generated-4K-Wallpaper.jpg" id="1_hyk8p"]
+[ext_resource type="Texture2D" uid="uid://2yxxnlkiqy01" path="res://assets/4k-Golden-Sunset-Over-City-Skyline-AI-Generated-4K-Wallpaper.jpg" id="1_hyk8p"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
