@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://fi7mnwrgwf3b"]
+
+[ext_resource type="Script" uid="uid://bd0e2kxp18eh" path="res://scenes/chat_app/chat_boxes/options_btns/options_btns.gd" id="1_73oec"]
+
+[node name="OptionsBtns" type="HBoxContainer"]
+custom_minimum_size = Vector2(500, 150)
+alignment = 1
+script = ExtResource("1_73oec")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+text = "Opcion 1"
+icon_alignment = 1
+
+[node name="Button2" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+text = "Opcion 2"

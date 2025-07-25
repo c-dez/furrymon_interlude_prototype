@@ -28,7 +28,16 @@
 						"personaje": "Potion Seller",
 						"lineas": [
 							"You can’t handle my potions! They would burn your insides!"
-						]
+						],
+
+						"siguiente":{
+							"personaje":"opciones",
+							"lineas":[
+								"esta es opcion 1", "y esta opcion 2"
+							]
+							
+						}
+
 					}
 				}
 			}
