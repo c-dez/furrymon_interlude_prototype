@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmn4pg2l7cl53"]
 
-[ext_resource type="Theme" uid="uid://cd4akw2p2l47o" path="res://scripts/globals/font_1.tres" id="1_lbo74"]
-[ext_resource type="Script" uid="uid://bdglqp5tsuykx" path="res://scenes/interactive_menu/right_chat_box.gd" id="1_s8atj"]
+[ext_resource type="Script" uid="uid://bdglqp5tsuykx" path="res://scenes/interactive_menu/chat_boxes/right/right_chat_box.gd" id="1_1e0vd"]
+[ext_resource type="Theme" uid="uid://cd4akw2p2l47o" path="res://scripts/globals/font_1.tres" id="2_4yi4g"]
 
 [node name="RightChatBox" type="HBoxContainer"]
-script = ExtResource("1_s8atj")
+script = ExtResource("1_1e0vd")
 
 [node name="Control" type="Control" parent="."]
-custom_minimum_size = Vector2(211.38, 0)
+custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -20,7 +20,7 @@ custom_minimum_size = Vector2(300, 100)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-theme = ExtResource("1_lbo74")
+theme = ExtResource("2_4yi4g")
 theme_override_constants/line_spacing = 0
 theme_override_constants/outline_size = 5
 text = "¿Ah no? Yo lo escogí pensando en ti. Quería ver tu reacción... y valió la pena. "

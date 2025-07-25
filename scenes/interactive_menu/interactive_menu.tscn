@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b350hvy60n7fg"]
 
 [ext_resource type="Script" uid="uid://b7y1doyos3u6x" path="res://scenes/interactive_menu/interactive_menu.gd" id="1_td75o"]
-[ext_resource type="PackedScene" uid="uid://cjj64iwklxhso" path="res://scenes/interactive_menu/left_chat_box.tscn" id="2_4lgfe"]
-[ext_resource type="PackedScene" uid="uid://dmn4pg2l7cl53" path="res://scenes/interactive_menu/right_chat_box.tscn" id="3_h0kfy"]
+[ext_resource type="PackedScene" uid="uid://cjj64iwklxhso" path="res://scenes/interactive_menu/chat_boxes/left/left_chat_box.tscn" id="2_4lgfe"]
+[ext_resource type="PackedScene" uid="uid://dmn4pg2l7cl53" path="res://scenes/interactive_menu/chat_boxes/right/right_chat_box.tscn" id="3_h0kfy"]
 
 [node name="InteractiveMenu" type="Control"]
 layout_direction = 1
@@ -39,4 +39,19 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="LeftChatBox" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_4lgfe")]
+layout_mode = 2
+
+[node name="LeftChatBox2" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_4lgfe")]
+layout_mode = 2
+
+[node name="LeftChatBox3" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_4lgfe")]
+layout_mode = 2
+
+[node name="LeftChatBox4" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_4lgfe")]
+layout_mode = 2
+
+[node name="LeftChatBox5" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_4lgfe")]
+layout_mode = 2
+
+[node name="LeftChatBox6" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_4lgfe")]
 layout_mode = 2
