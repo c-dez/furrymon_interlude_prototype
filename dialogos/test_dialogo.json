@@ -1,36 +1,68 @@
 {
     "personaje": "Caballero",
     "lineas": [
-        "este es un test de dialogo",
-        "con opciones multiples"
+        "Potion seller",
+        "I’m going into battle, and I want your strongest potions."
     ],
-    "lineas_2":["no debe leerse esto!"],
+    "lineas_2": [
+        "error"
+    ],
     "siguiente": {
-        "personaje": "opciones",
+        "personaje": "Potion",
         "lineas": [
-           "opcion 1"
+            "My potions are too strong for you, traveler."
         ],
-        "lineas_2":[
-            "opcion 2rerr"
-        ],
+        "lineas_2": [],
         "siguiente": {
             "personaje": "Caballero",
             "lineas": [
-                    "esta es opcion 1"
+                "I’m going into battle, and I need your strongest potions."
             ],
-            "lineas_2":[
-                    "esta es opcion 2"
-            ],
-            "siguiente":{
-                "personaje":"potion",
-                "lineas":[
-                    "sirvio?",
-                    "si..."
+            "lineas_2": [],
+            "siguiente": {
+                "personaje": "Potion",
+                "lineas": [
+                    "You can’t handle my strongest potions.",
+                    "They’d kill a dragon, let alone a man.",
+                    "You need a seller that sells weaker potions, because my potions are too strong."
                 ],
-                "lineas_2":[
-                    "sdsds",
-                    "error?"
-                ]
+                "lineas_2": [],
+                "siguiente": {
+                    "personaje": "Caballero",
+                    "lineas": [
+                        "Potion seller, I tell you I’m going into battle, and I need only your strongest potions."
+                    ],
+                    "lineas_2": [],
+                    "siguiente": {
+                        "personaje":"opciones",
+                        "lineas":["Waht do I have to do?"],
+                        "lineas_2":["I’m going to battle..."],
+                        "siguiente":{
+                            "personaje":"Potion",
+                            "lineas":["Drink this if you want my Potions!"],
+                            "lineas_2":["You can’t handle my strongest potions!"],
+                            "command":["if branch 2 end dialog"],
+                            "siguiente":{
+                                "personaje":"opciones",
+                                "lineas":["Drink potion!"],
+                                "lineas_2":["Don't Drink it!"],
+                                "siguiente":{
+                                    "personaje":"Caballero",
+                                    "lineas":["OK! now what?!","Ehh... wahts happening...?"],
+                                    "lineas_2":[],
+                                    "siguiente":{
+                                        "personaje":"Potion",
+                                        "lineas":["He he he...fool..."],
+                                        "lineas_2":[],
+                                        "command":["change gender"]
+                                    }
+
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
         }
     }

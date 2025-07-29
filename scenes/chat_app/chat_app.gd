@@ -13,20 +13,22 @@ const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options
 
 var dialogo_actual = {}
 var index: int = 0
-
-var text_content: String
-
 var branch_1: String = "branch_1"
 var branch_2: String = "branch_2"
-
 var current_branch: String = branch_1
-
 var input_enable: bool = true
+
+var text_command:String = ""
+
+
+var photo_frame:PhotoFrame
+
 
 
 func _ready() -> void:
 	dialogo_actual = load_dialog("res://dialogos/test_dialogo.json") as Dictionary
 	print("presiona enter para avanzar")
+	photo_frame = get_node("..").get_node("PhotoFrame")
 	
 	pass
 
@@ -38,6 +40,14 @@ func _process(_delta: float) -> void:
 		imprimir_linea()
 		# print("index: ",index)
 		pass
+	
+	if text_command == "if branch 2 end dialog"and current_branch == branch_2:
+		dialogo_actual = null
+	elif text_command == "change gender":
+		photo_frame.frame_furry.visible = true
+		photo_frame.frame_knight.visible = false
+		pass
+
 
 
 	pass
@@ -52,6 +62,12 @@ func imprimir_linea() -> void:
 	var lineas_2: Array = dialogo_actual["lineas_2"]
 	var personaje: String = dialogo_actual["personaje"]
 
+	if dialogo_actual.has("command"):
+		if index < dialogo_actual["command"].size():
+			text_command = dialogo_actual["command"][index]
+		else:
+			text_command = ''
+
 	if index < lineas.size():
 		if personaje == "Caballero":
 			var instance: RightChatBox = right_chat.instantiate()
@@ -60,6 +76,7 @@ func imprimir_linea() -> void:
 				instance.label.text = lineas[index]
 			else:
 				instance.label.text = lineas_2[index]
+			print(text_command)
 
 			
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
@@ -71,7 +88,7 @@ func imprimir_linea() -> void:
 			input_enable = false
 			var instance: OptionsBtns = options_btns.instantiate()
 			v_box.add_child(instance)
-			# para evitar problemas lineas que es un array, contiene un array y este array contiene las dos opciones por eso las dos siguientes lineas
+			
 			instance.option_1.text = lineas[0]
 			instance.option_2.text = lineas_2[0]
 			#senales
@@ -89,6 +106,8 @@ func imprimir_linea() -> void:
 				instance.label.text = lineas[index]
 			else:
 				instance.label.text = lineas_2[index]
+			print(text_command)
+
 
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 			await get_tree().process_frame
