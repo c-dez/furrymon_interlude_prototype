@@ -23,3 +23,4 @@ func load_game() -> void:
 		var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 		game_save_file = file.get_var()
 		print("game loaded")
+

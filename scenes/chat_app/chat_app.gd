@@ -16,6 +16,9 @@ var index: int = 0
 
 var text_content: String
 
+var branch_1:String = "siguiente"
+var branch_2:String = "branch_2"
+
 
 func _ready() -> void:
 	dialogo_actual = load_dialog("res://dialogos/dialogo.json") as Dictionary
@@ -33,18 +36,6 @@ func _process(_delta: float) -> void:
 
 
 	pass
-
-# func imprimir_opciones() -> void:
-# 	var instance: OptionsBtns = options_btns.instantiate()
-# 	v_box.add_child(instance)
-# 	instance.option_1.text = "texto1"
-# 	instance.option_2.text = "texto2"
-# 	#senales
-# 	instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1.text))
-# 	instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_2.text))
-
-# 	await get_tree().process_frame
-# 	scroll_container.ensure_control_visible(instance)
 
 
 func imprimir_linea() -> void:
@@ -64,6 +55,7 @@ func imprimir_linea() -> void:
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
 			index += 1
+
 		elif personaje == "opciones":
 			var instance: OptionsBtns = options_btns.instantiate()
 			v_box.add_child(instance)
@@ -76,7 +68,8 @@ func imprimir_linea() -> void:
 
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
-			index += 1
+			index += 2 
+
 		else:
 			var instance: LeftChatBox = left_chat.instantiate()
 			v_box.add_child(instance)
@@ -85,7 +78,7 @@ func imprimir_linea() -> void:
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
-			index += 1
+			index += 1 
 	else:
 		if dialogo_actual.has("siguiente"):
 			dialogo_actual = dialogo_actual["siguiente"]
@@ -104,8 +97,10 @@ func load_dialog(ruta: String) -> Dictionary:
 
 
 func _on_option_1_pressed(text: String):
+	imprimir_linea()
 	print(text)
 
 
 func _on_option_2_pressed(text: String):
+	imprimir_linea()
 	print(text)

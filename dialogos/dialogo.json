@@ -29,15 +29,22 @@
 						"lineas": [
 							"You can’t handle my potions! They would burn your insides!"
 						],
-
-						"siguiente":{
-							"personaje":"opciones",
-							"lineas":[
-								["esta es opcion 1", "y esta opcion 2"]
-							]
-							
+						"siguiente": {
+							"personaje": "opciones",
+							"lineas": [
+								[
+									"Listen to me...",
+									"What can I do..."
+								]
+							],
+							"siguiente": {
+								"personaje": "Caballero",
+								"lineas": [
+									"opcion 1",
+									"opcion 2"
+								]
+							}
 						}
-
 					}
 				}
 			}

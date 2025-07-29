@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwlddgg8x7ccb"]
+[gd_scene load_steps=4 format=3 uid="uid://cwlddgg8x7ccb"]
 
 [ext_resource type="Texture2D" uid="uid://cif6yxm51mqxl" path="res://assets/images/1020739-3316-169-Aspect-Ratio-s-SFW-forest-autumn-land.png" id="1_iuonh"]
 [ext_resource type="PackedScene" uid="uid://b350hvy60n7fg" path="res://scenes/chat_app/chat_app.tscn" id="2_k2fmo"]
+[ext_resource type="Texture2D" uid="uid://bie3fbw5s3m81" path="res://nsfw/photos/malin-falch-potionseller-small.jpg" id="2_l3cfh"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -21,7 +22,31 @@ grow_vertical = 2
 texture = ExtResource("1_iuonh")
 expand_mode = 2
 
-[node name="InteractiveMenu" parent="." instance=ExtResource("2_k2fmo")]
+[node name="PhotoFrame" type="Control" parent="."]
 layout_mode = 1
-offset_left = -148.0
-offset_right = -148.0
+anchor_left = 0.706
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.9
+offset_left = -19.7599
+offset_right = -19.7599
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PhotoFrame"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="PhotoFrame/SubViewportContainer"]
+position = Vector2(-92, -15)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_l3cfh")
+centered = false
+
+[node name="ChatApp" parent="." instance=ExtResource("2_k2fmo")]
+layout_mode = 1
+offset_left = -140.0
+offset_right = -140.0
