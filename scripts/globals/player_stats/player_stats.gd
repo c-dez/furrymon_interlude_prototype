@@ -1,5 +1,11 @@
 extends Node
-# global, 
+# global
 
 
-var player_name:String = "John DarkSouls"
+var player_stats: Dictionary = {
+	"player_name": "Default Name",
+	"affection": 0,
+	"str": 0,
+	"int": 0,
+	"cha": 0,
+}

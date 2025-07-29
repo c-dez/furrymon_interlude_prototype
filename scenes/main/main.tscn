@@ -23,3 +23,5 @@ expand_mode = 2
 
 [node name="InteractiveMenu" parent="." instance=ExtResource("2_k2fmo")]
 layout_mode = 1
+offset_left = -148.0
+offset_right = -148.0
