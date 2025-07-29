@@ -1,20 +1,21 @@
-class_name ChatApp # no me gusta este nombre cambiarlo por algo mas descriptivo
+class_name ChatApp
 extends Control
 # este nodo se encarga de crear las cajas de texto, su contenido y scroll
+
 
 @onready var scroll_container: ScrollContainer = get_node("ScrollContainer")
 @onready var v_box: VBoxContainer = scroll_container.get_node("VBoxContainer")
 
-var left_chat: Resource = preload("res://scenes/chat_app/chat_boxes/left/left_chat_box.tscn")
-var right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/right_chat_box.tscn")
+const left_chat: Resource = preload("res://scenes/chat_app/chat_boxes/left/left_chat_box.tscn")
+const right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/right_chat_box.tscn")
 #optionsBtns
-var options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options_btns/options_btns.tscn")
+const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options_btns/options_btns.tscn")
 
 var dialogo_actual = {}
 var index: int = 0
 
-
 var text_content: String
+
 
 func _ready() -> void:
 	dialogo_actual = load_dialog("res://dialogos/dialogo.json") as Dictionary
@@ -46,17 +47,8 @@ func _process(_delta: float) -> void:
 # 	scroll_container.ensure_control_visible(instance)
 
 
-func _on_option_1_pressed(text):
-	print(text)
-
-
-func _on_option_2_pressed(text):
-	print(text)
-
-
 func imprimir_linea() -> void:
 	if dialogo_actual == null:
-		# print("dialogo null")
 		return
 
 	var lineas: Array = dialogo_actual["lineas"]
@@ -67,6 +59,7 @@ func imprimir_linea() -> void:
 			var instance: RightChatBox = right_chat.instantiate()
 			v_box.add_child(instance)
 			instance.label.text = lineas[index]
+
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
@@ -88,7 +81,7 @@ func imprimir_linea() -> void:
 			var instance: LeftChatBox = left_chat.instantiate()
 			v_box.add_child(instance)
 			instance.label.text = lineas[index]
-			
+
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
@@ -103,8 +96,16 @@ func imprimir_linea() -> void:
 			dialogo_actual = null
 	
 
-func load_dialog(ruta: String):
+func load_dialog(ruta: String) -> Dictionary:
 	var archivo := FileAccess.open(ruta, FileAccess.READ)
 	var contenido: String = archivo.get_as_text()
 	var datos: Dictionary = JSON.parse_string(contenido)
 	return datos
+
+
+func _on_option_1_pressed(text: String):
+	print(text)
+
+
+func _on_option_2_pressed(text: String):
+	print(text)
