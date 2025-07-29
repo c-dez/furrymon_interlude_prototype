@@ -33,16 +33,21 @@
 							"personaje": "opciones",
 							"lineas": [
 								[
-									"Listen to me...",
-									"What can I do..."
+									"esta es opcion 1",
+									"y esta opcion 2"
 								]
 							],
 							"siguiente": {
 								"personaje": "Caballero",
 								"lineas": [
-									"opcion 1",
-									"opcion 2"
-								]
+									"opcion 1"
+								],
+								"branch_2": {
+									"personaje": "Caballero",
+									"lineas": [
+										"opcion 2"
+									]
+								}
 							}
 						}
 					}

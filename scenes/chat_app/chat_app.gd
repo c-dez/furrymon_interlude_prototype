@@ -16,12 +16,16 @@ var index: int = 0
 
 var text_content: String
 
-var branch_1:String = "siguiente"
-var branch_2:String = "branch_2"
+var branch_1: String = "branch_1"
+var branch_2: String = "branch_2"
+
+var current_branch: String = branch_1
+
+var input_enable: bool = true
 
 
 func _ready() -> void:
-	dialogo_actual = load_dialog("res://dialogos/dialogo.json") as Dictionary
+	dialogo_actual = load_dialog("res://dialogos/test_dialogo.json") as Dictionary
 	print("presiona enter para avanzar")
 	
 	pass
@@ -30,8 +34,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# test
 	# crea un nodo y baja el scroll bar
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and input_enable:
 		imprimir_linea()
+		# print("index: ",index)
 		pass
 
 
@@ -40,53 +45,65 @@ func _process(_delta: float) -> void:
 
 func imprimir_linea() -> void:
 	if dialogo_actual == null:
+		print("dialogo null")
 		return
 
 	var lineas: Array = dialogo_actual["lineas"]
+	var lineas_2: Array = dialogo_actual["lineas_2"]
 	var personaje: String = dialogo_actual["personaje"]
 
 	if index < lineas.size():
 		if personaje == "Caballero":
 			var instance: RightChatBox = right_chat.instantiate()
 			v_box.add_child(instance)
-			instance.label.text = lineas[index]
+			if current_branch == branch_1:
+				instance.label.text = lineas[index]
+			else:
+				instance.label.text = lineas_2[index]
 
+			
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
 			index += 1
 
 		elif personaje == "opciones":
+			input_enable = false
 			var instance: OptionsBtns = options_btns.instantiate()
 			v_box.add_child(instance)
 			# para evitar problemas lineas que es un array, contiene un array y este array contiene las dos opciones por eso las dos siguientes lineas
-			instance.option_1.text = lineas[0][0]
-			instance.option_2.text = lineas[0][1]
+			instance.option_1.text = lineas[0]
+			instance.option_2.text = lineas_2[0]
 			#senales
-			instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1.text))
-			instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_2.text))
+			instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1, instance.option_2))
+			instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_1, instance.option_2))
 
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
-			index += 2 
+			index += 1
 
 		else:
 			var instance: LeftChatBox = left_chat.instantiate()
 			v_box.add_child(instance)
-			instance.label.text = lineas[index]
+			if current_branch == branch_1:
+				instance.label.text = lineas[index]
+			else:
+				instance.label.text = lineas_2[index]
 
 			# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 			await get_tree().process_frame
 			scroll_container.ensure_control_visible(instance)
-			index += 1 
+			index += 1
 	else:
 		if dialogo_actual.has("siguiente"):
 			dialogo_actual = dialogo_actual["siguiente"]
 			index = 0
 			imprimir_linea()
+		
 		else:
 			print("fin de dialogo")
 			dialogo_actual = null
+			index = 0
 	
 
 func load_dialog(ruta: String) -> Dictionary:
@@ -96,11 +113,26 @@ func load_dialog(ruta: String) -> Dictionary:
 	return datos
 
 
-func _on_option_1_pressed(text: String):
+func _on_option_1_pressed(btn1: Button, btn2: Button):
+	input_enable = true
+
+	current_branch = branch_1
+	btn1.disabled = true
+	btn2.disabled = true
+	btn2.text = ""
+
 	imprimir_linea()
-	print(text)
+	print(current_branch)
 
 
-func _on_option_2_pressed(text: String):
+func _on_option_2_pressed(btn1: Button, btn2: Button):
+	input_enable = true
+
+	current_branch = branch_2
+	btn1.disabled = true
+	btn2.disabled = true
+	btn1.text = ""
+
+
 	imprimir_linea()
-	print(text)
+	print(current_branch)

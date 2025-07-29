@@ -1,0 +1,37 @@
+{
+    "personaje": "Caballero",
+    "lineas": [
+        "este es un test de dialogo",
+        "con opciones multiples"
+    ],
+    "lineas_2":["no debe leerse esto!"],
+    "siguiente": {
+        "personaje": "opciones",
+        "lineas": [
+           "opcion 1"
+        ],
+        "lineas_2":[
+            "opcion 2rerr"
+        ],
+        "siguiente": {
+            "personaje": "Caballero",
+            "lineas": [
+                    "esta es opcion 1"
+            ],
+            "lineas_2":[
+                    "esta es opcion 2"
+            ],
+            "siguiente":{
+                "personaje":"potion",
+                "lineas":[
+                    "sirvio?",
+                    "si..."
+                ],
+                "lineas_2":[
+                    "sdsds",
+                    "error?"
+                ]
+            }
+        }
+    }
+}
