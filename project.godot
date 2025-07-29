@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 run/size/viewport_height=540
 run/size/viewport_width=960
 
+[autoload]
+
+PlayerStats="*res://scripts/globals/player_stats/player_stats.gd"
+
 [display]
 
 window/size/viewport_width=960
