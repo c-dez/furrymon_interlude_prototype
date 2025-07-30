@@ -54,8 +54,15 @@
                                         "personaje":"Potion",
                                         "lineas":["He he he...fool..."],
                                         "lineas_2":[],
-                                        "command":["change gender"]
+                                        "command":["change gender"],
+                                        "siguiente":{
+                                            "personaje":"Caballero",
+                                            "lineas":[
+                                                "UwU"
+                                            ],"lineas_2":[]
+                                        }
                                     }
+                                    
 
                                 }
                             }
