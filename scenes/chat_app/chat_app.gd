@@ -13,13 +13,14 @@ const right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/rig
 const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options_btns/options_btns.tscn")
 
 var dialog_path: String = "res://dialogos/dialogos_red.json"
+
 var dialogo_actual: Dictionary = {}
 var index: int = 0
 var branch_1: String = "branch_1"
 var branch_2: String = "branch_2"
 var current_branch: String = branch_1
 var input_enable: bool = true
-var text_command: Array
+var text_commands: Array
 
 var player_id: String = PlayerStats.player_stats["player_id"]
 
@@ -30,18 +31,18 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and input_enable:
-		imprimir_linea()
+		print_linea()
 
-	# text_command/ string en el dialogo para ejecutar acciones especificas
+	# text_commands/ string en el dialogo para ejecutar acciones especificas
 	# cuando hya mas material pensar en como estructurar este sistema/ como estandarizarlo etc
-	# if text_command == "if branch 2 end dialog" and current_branch == branch_2:
+	# if text_commands == "if branch 2 end dialog" and current_branch == branch_2:
 	# 	dialogo_actual = {}
-	# elif text_command == "change gender":
+	# elif text_commands == "change gender":
 	# 	photo_frame.frame_furry.visible = true
 	# 	photo_frame.frame_knight.visible = false
 
 
-func imprimir_linea() -> void:
+func print_linea() -> void:
 	if dialogo_actual == {}:
 		print("dialogo empty")
 		return
@@ -50,8 +51,8 @@ func imprimir_linea() -> void:
 	var lineas: Array = dialogo_actual["lineas"]
 	var lineas_2: Array = []
 
-	text_command = text_command_assign()
-	lineas_2 = linea_2_assign()
+	text_commands = text_command_assign()
+	lineas_2 = lineas_2_assign()
 
 	if index < lineas.size():
 		match personaje:
@@ -78,9 +79,9 @@ func _on_option_1_pressed(btn1: Button, btn2: Button) -> void:
 	btn1.disabled = true
 	btn2.disabled = true
 	btn2.text = ""
-	print(text_command[0])
-	text_command = []
-	imprimir_linea()
+	print(text_commands[0])
+	text_commands = []
+	print_linea()
 
 
 func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
@@ -89,14 +90,14 @@ func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
 	btn1.disabled = true
 	btn2.disabled = true
 	btn1.text = ""
-	print(text_command[1])
-	text_command = []
-	imprimir_linea()
+	print(text_commands[1])
+	text_commands = []
+	print_linea()
 
 
 func text_command_assign() -> Array:
 	var _text_command: Array
-	# asigna el contenido de text_command si
+	# asigna el contenido de text_commands si
 	if dialogo_actual.has("command"):
 		_text_command = dialogo_actual["command"]
 	else:
@@ -104,7 +105,7 @@ func text_command_assign() -> Array:
 	return _text_command
 
 
-func linea_2_assign() -> Array:
+func lineas_2_assign() -> Array:
 	var _lineas_2: Array
 	if dialogo_actual.has("lineas_2"):
 		if index < dialogo_actual["lineas_2"].size():
@@ -159,7 +160,7 @@ func advance_dialog() -> void:
 	if dialogo_actual.has("siguiente"):
 		dialogo_actual = dialogo_actual["siguiente"]
 		index = 0
-		imprimir_linea()
+		print_linea()
 	else:
 		print("fin de dialogo")
 		dialogo_actual = {}
