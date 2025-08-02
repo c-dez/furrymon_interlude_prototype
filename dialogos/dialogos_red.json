@@ -1,0 +1,70 @@
+{
+    "personaje":"Flarya",
+    "lineas":[
+        "Vaya, vaya... Ok. Interesante perfil.",
+        "No usaste ninguna frase genérica ni pusiste una foto de tu comida. Ya es más de lo que la mayoría logra.",
+        "¿Eso es un reto disfrazado de perfil, o solo estás buscando a alguien que te haga sudar por mensaje? ",
+        "Porque si te gusta el fuego... ya hiciste match con el volcán equivocado, cariño."
+    ],
+    "command":[
+        "inicia la conversación, *Se muestra una imagén de Flarya frente al espejo con expresión retadora, una vista feroz, una sonrisa en la boca, con una mano sostiene el movil mientras la otra se mantiene apoyada en su cintura, viste un top negro que solo cubre sus avultados pechos y deja al descubierto su estomago y parte del torso, dejando ver unas curvas muy bien formadas y unos brazos muy bien tonificados, en el vidrio se ve a una luponny levantando una mancuerna y una lycanroc golpeando un saco de boxeo*"
+    ],
+    "siguiente":{
+        "personaje":"opciones",
+        "lineas":["Eres muy directa… "],
+        "lineas_2":["Si me vas a poner a prueba..."],
+        "command":["+1 interes","+2 interes"],
+        "siguiente":{
+            "personaje":"Player",
+            "lineas":[" Eres muy directa… no estoy acostumbrado a eso. Pero me gusta."],
+            "lineas_2":["Si me vas a poner a prueba, al menos calienta primero. No quiero ganarte tan fácil."],
+            "siguiente":{
+                "personaje":"Flarya",
+                "lineas":[
+                    "Directa, sí. Pero tampoco soy imposible.",
+                    "Solo no esperes que baje el ritmo mucho."
+            ],
+            "lineas_2":[
+                "Jaja, me gusta esa confianz",
+                "pero no te confundas, calentamiento para mí es solo para los débiles.",
+                "Aquí el juego es de verdad, y no hay tiempo para titubeos.",
+                "Así que prepárate, porque voy a exigir más de lo que crees poder dar.",
+                "¿Listo para que te queme en serio?"
+            ],
+            "siguiente":{
+                "personaje":"Player",
+                "lineas":[
+                    "¡Entonces estamos bien!",
+                    "No me importa que vayas rápido… si el camino vale la pena, yo corro hasta con los pulmones ardiendo.",
+                    "Te aviso desde ya: no soy de los que se rinden fácil."
+                ],
+                "lineas_2":[
+                    "¿Calentamiento para débiles? Perfecto.",
+                    "Entonces voy directo a la sesión intensa…",
+                    "Y si logro mantenerte interesada, no solo voy a resistir, Flarya.",
+                    "Voy a dejarte jadeando, sudada, y pidiendo otra ronda de cardio sin siquiera tocarte."
+                ],
+                "siguiente":{
+                    "personaje":"Flarya",
+                    "lineas":[
+                        "Aww… qué lindo. Tan entusiasta.",
+                        "Como un pequeño Ralt del gimnasio que quieren levantar más de lo que pesa su ego.",
+                        "Me agradas, pequeño saco de huesos. Al menos tienes fuego en vez de excusas.",
+                        "Solo no te distraigas mirándome mientras corres detrás de mí, ¿sí? No quiero que tropieces por ver demasiado."
+                    ],
+                    "lineas_2":[
+                        "¡Vaya, vaya!",
+                        "¿Así que vienes a dejarme jadeando, eh?",
+                        "Me gusta. Al fin alguien que no se quiebra con una amenaza de calor.",
+                        "Pero cuidado… si vas a prometer cardio salvaje, más te vale tener el ritmo, porque yo no me rindo fácil.",
+                        "Y si me haces temblar... voy a dejarte incinerado la próxima vez."
+
+                    ]
+
+                }
+            }
+            }
+
+        }
+    }
+}

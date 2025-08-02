@@ -12,7 +12,7 @@ const left_chat: Resource = preload("res://scenes/chat_app/chat_boxes/left/left_
 const right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/right_chat_box.tscn")
 const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options_btns/options_btns.tscn")
 
-var dialog_path: String = "res://dialogos/test_dialogo.json"
+var dialog_path: String = "res://dialogos/dialogos_red.json"
 var dialogo_actual: Dictionary = {}
 var index: int = 0
 var branch_1: String = "branch_1"
@@ -20,6 +20,8 @@ var branch_2: String = "branch_2"
 var current_branch: String = branch_1
 var input_enable: bool = true
 var text_command: String = ""
+
+var player_name:String = "Player"
 
 
 func _ready() -> void:
@@ -62,7 +64,7 @@ func imprimir_linea() -> void:
 			lineas_2 = []
 
 	if index < lineas.size():
-		if personaje == "Caballero":
+		if personaje == player_name:
 			var instance: RightChatBox = right_chat.instantiate()
 			v_box_container.add_child(instance)
 			if current_branch == branch_1:
