@@ -61,18 +61,9 @@ func imprimir_linea() -> void:
 				options_btns_behavior(lineas, lineas_2)
 			_:
 				left_chat_box_behavior(lineas, lineas_2)
-				
-
 	else:
-		if dialogo_actual.has("siguiente"):
-			dialogo_actual = dialogo_actual["siguiente"]
-			index = 0
-			imprimir_linea()
-		else:
-			print("fin de dialogo")
-			dialogo_actual = {}
-			index = 0
-	
+		advance_dialog()
+
 
 func load_dialog(path: String) -> Dictionary:
 	var archivo := FileAccess.open(path, FileAccess.READ)
@@ -162,3 +153,14 @@ func left_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 		instance.label.text = lineas_2[index]
 	index += 1
 	scroll_to_bottom(instance)
+
+
+func advance_dialog() -> void:
+	if dialogo_actual.has("siguiente"):
+		dialogo_actual = dialogo_actual["siguiente"]
+		index = 0
+		imprimir_linea()
+	else:
+		print("fin de dialogo")
+		dialogo_actual = {}
+		index = 0
