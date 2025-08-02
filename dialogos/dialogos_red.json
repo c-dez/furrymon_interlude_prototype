@@ -13,7 +13,7 @@
         "personaje":"opciones",
         "lineas":["Eres muy directa… "],
         "lineas_2":["Si me vas a poner a prueba..."],
-        "command":["+1 interes","+2 interes"],
+        "command":["flarya int +1","flarya int +2"],
         "siguiente":{
             "personaje":"Player",
             "lineas":[" Eres muy directa… no estoy acostumbrado a eso. Pero me gusta."],

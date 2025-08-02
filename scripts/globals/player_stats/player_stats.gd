@@ -7,6 +7,6 @@ var player_stats: Dictionary = {
 	"player_id":"Player",
 	
 	"flarya":{
-		"interes": 0,
+		"int": 0,
 	}
 }

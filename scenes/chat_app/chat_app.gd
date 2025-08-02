@@ -55,28 +55,13 @@ func imprimir_linea() -> void:
 
 	if index < lineas.size():
 		if personaje == player_id:
-			var instance: RightChatBox = right_chat.instantiate()
-			v_box_container.add_child(instance)
-			if current_branch == branch_1:
-				instance.label.text = lineas[index]
-			else:
-				instance.label.text = lineas_2[index]
-			index += 1
-			scroll_to_bottom(instance)
+			right_chat_box_behavior(lineas, lineas_2)
 
 		elif personaje == "opciones":
 			options_btns_behavior(lineas, lineas_2)
-			
 
 		else:
-			var instance: LeftChatBox = left_chat.instantiate()
-			v_box_container.add_child(instance)
-			if current_branch == branch_1:
-				instance.label.text = lineas[index]
-			else:
-				instance.label.text = lineas_2[index]
-			index += 1
-			scroll_to_bottom(instance)
+			left_chat_box_behavior(lineas, lineas_2)
 
 	else:
 		if dialogo_actual.has("siguiente"):
@@ -153,5 +138,27 @@ func options_btns_behavior(lineas: Array, lineas_2: Array) -> void:
 	#senales
 	instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1, instance.option_2))
 	instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_1, instance.option_2))
+	index += 1
+	scroll_to_bottom(instance)
+
+
+func right_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
+	var instance: RightChatBox = right_chat.instantiate()
+	v_box_container.add_child(instance)
+	if current_branch == branch_1:
+		instance.label.text = lineas[index]
+	else:
+		instance.label.text = lineas_2[index]
+	index += 1
+	scroll_to_bottom(instance)
+
+
+func left_chat_box_behavior(lineas: Array, lineas_2: Array)->void:
+	var instance: LeftChatBox = left_chat.instantiate()
+	v_box_container.add_child(instance)
+	if current_branch == branch_1:
+		instance.label.text = lineas[index]
+	else:
+		instance.label.text = lineas_2[index]
 	index += 1
 	scroll_to_bottom(instance)
