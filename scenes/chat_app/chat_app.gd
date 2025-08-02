@@ -25,7 +25,6 @@ var player_id: String = PlayerStats.player_stats["player_id"]
 
 
 func _ready() -> void:
-	# cuando haya mas material crear un sistema que decida cual es el dialogo actual
 	dialogo_actual = load_dialog(dialog_path)
 	
 
@@ -66,16 +65,8 @@ func imprimir_linea() -> void:
 			scroll_to_bottom(instance)
 
 		elif personaje == "opciones":
-			input_enable = false
-			var instance: OptionsBtns = options_btns.instantiate()
-			v_box_container.add_child(instance)
-			instance.option_1.text = lineas[0]
-			instance.option_2.text = lineas_2[0]
-			#senales
-			instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1, instance.option_2))
-			instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_1, instance.option_2))
-			index += 1
-			scroll_to_bottom(instance)
+			options_btns_behavior(lineas, lineas_2)
+			
 
 		else:
 			var instance: LeftChatBox = left_chat.instantiate()
@@ -151,3 +142,16 @@ func scroll_to_bottom(instance: Node) -> void:
 	# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 	await get_tree().process_frame
 	scroll_container.ensure_control_visible(instance)
+
+
+func options_btns_behavior(lineas: Array, lineas_2: Array) -> void:
+	input_enable = false
+	var instance: OptionsBtns = options_btns.instantiate()
+	v_box_container.add_child(instance)
+	instance.option_1.text = lineas[0]
+	instance.option_2.text = lineas_2[0]
+	#senales
+	instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1, instance.option_2))
+	instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_1, instance.option_2))
+	index += 1
+	scroll_to_bottom(instance)
