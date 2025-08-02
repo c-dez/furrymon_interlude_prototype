@@ -54,14 +54,14 @@ func imprimir_linea() -> void:
 	lineas_2 = linea_2_assign()
 
 	if index < lineas.size():
-		if personaje == player_id:
-			right_chat_box_behavior(lineas, lineas_2)
-
-		elif personaje == "opciones":
-			options_btns_behavior(lineas, lineas_2)
-
-		else:
-			left_chat_box_behavior(lineas, lineas_2)
+		match personaje:
+			player_id:
+				right_chat_box_behavior(lineas, lineas_2)
+			"opciones":
+				options_btns_behavior(lineas, lineas_2)
+			_:
+				left_chat_box_behavior(lineas, lineas_2)
+				
 
 	else:
 		if dialogo_actual.has("siguiente"):
@@ -153,7 +153,7 @@ func right_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	scroll_to_bottom(instance)
 
 
-func left_chat_box_behavior(lineas: Array, lineas_2: Array)->void:
+func left_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	var instance: LeftChatBox = left_chat.instantiate()
 	v_box_container.add_child(instance)
 	if current_branch == branch_1:
