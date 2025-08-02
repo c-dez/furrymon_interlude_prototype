@@ -19,9 +19,9 @@ var branch_1: String = "branch_1"
 var branch_2: String = "branch_2"
 var current_branch: String = branch_1
 var input_enable: bool = true
-var text_command: String = ""
+var text_command: Array
 
-var player_name:String = "Player"
+var player_id: String = PlayerStats.player_stats["player_id"]
 
 
 func _ready() -> void:
@@ -35,11 +35,11 @@ func _process(_delta: float) -> void:
 
 	# text_command/ string en el dialogo para ejecutar acciones especificas
 	# cuando hya mas material pensar en como estructurar este sistema/ como estandarizarlo etc
-	if text_command == "if branch 2 end dialog" and current_branch == branch_2:
-		dialogo_actual = {}
-	elif text_command == "change gender":
-		photo_frame.frame_furry.visible = true
-		photo_frame.frame_knight.visible = false
+	# if text_command == "if branch 2 end dialog" and current_branch == branch_2:
+	# 	dialogo_actual = {}
+	# elif text_command == "change gender":
+	# 	photo_frame.frame_furry.visible = true
+	# 	photo_frame.frame_knight.visible = false
 
 
 func imprimir_linea() -> void:
@@ -51,20 +51,11 @@ func imprimir_linea() -> void:
 	var lineas: Array = dialogo_actual["lineas"]
 	var lineas_2: Array = []
 
-	# si no existe "command" o "lineas_2" asignar valores vacios
-	if dialogo_actual.has("command"):
-		if index < dialogo_actual["command"].size():
-			text_command = dialogo_actual["command"][index]
-		else:
-			text_command = "text_command null"
-	if dialogo_actual.has("lineas_2"):
-		if index < dialogo_actual["lineas_2"].size():
-			lineas_2 = dialogo_actual["lineas_2"]
-		else:
-			lineas_2 = []
+	text_command = text_command_assign()
+	lineas_2 = linea_2_assign()
 
 	if index < lineas.size():
-		if personaje == player_name:
+		if personaje == player_id:
 			var instance: RightChatBox = right_chat.instantiate()
 			v_box_container.add_child(instance)
 			if current_branch == branch_1:
@@ -93,7 +84,6 @@ func imprimir_linea() -> void:
 				instance.label.text = lineas[index]
 			else:
 				instance.label.text = lineas_2[index]
-			print(text_command)
 			index += 1
 			scroll_to_bottom(instance)
 
@@ -121,8 +111,9 @@ func _on_option_1_pressed(btn1: Button, btn2: Button) -> void:
 	btn1.disabled = true
 	btn2.disabled = true
 	btn2.text = ""
+	print(text_command[0])
+	text_command = []
 	imprimir_linea()
-	print(current_branch)
 
 
 func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
@@ -131,9 +122,30 @@ func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
 	btn1.disabled = true
 	btn2.disabled = true
 	btn1.text = ""
+	print(text_command[1])
+	text_command = []
 	imprimir_linea()
-	print(current_branch)
 
+
+func text_command_assign() -> Array:
+	var _text_command: Array
+	# asigna el contenido de text_command si
+	if dialogo_actual.has("command"):
+		_text_command = dialogo_actual["command"]
+	else:
+		_text_command = []
+	return _text_command
+
+
+func linea_2_assign() -> Array:
+	var _lineas_2: Array
+	if dialogo_actual.has("lineas_2"):
+		if index < dialogo_actual["lineas_2"].size():
+			_lineas_2 = dialogo_actual["lineas_2"]
+		else:
+			_lineas_2 = []
+	return _lineas_2
+	
 
 func scroll_to_bottom(instance: Node) -> void:
 	# asegurarse que el scroll se baje para que el nuevo nodo sea visible
