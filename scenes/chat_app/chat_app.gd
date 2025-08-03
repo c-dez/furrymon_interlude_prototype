@@ -17,6 +17,7 @@ var dialog_path: String = "res://dialogos/dialogos_red.json"
 var dialogo_actual: Dictionary = {}
 var index: int = 0
 
+
 enum BRANCHES {
 	branch_1,
 	branch_2
@@ -41,17 +42,11 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and input_enable:
 		print_linea()
 
-	# text_commands/ string en el dialogo para ejecutar acciones especificas
-	# cuando hya mas material pensar en como estructurar este sistema/ como estandarizarlo etc
-	# if text_commands == "if BRANCHES 2 end dialog" and current_branch == branch_2:
-	# 	dialogo_actual = {}
-	# elif text_commands == "change gender":
-	# 	photo_frame.frame_furry.visible = true
-	# 	photo_frame.frame_knight.visible = false
-
 
 func print_linea() -> void:
+	# se encarga de ir leyendo y decidiendo que lineas de dialogo y donde se van a "imprimir"
 	if dialogo_actual == {}:
+		# cuando termina el dialogo
 		print("dialogo empty")
 		return
 
@@ -74,7 +69,6 @@ func print_linea() -> void:
 	else:
 		text_command_read()
 		advance_dialog()
-
 
 
 func load_dialog(path: String) -> Dictionary:
