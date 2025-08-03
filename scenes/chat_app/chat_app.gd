@@ -23,10 +23,14 @@ var input_enable: bool = true
 var text_commands: Array
 
 var player_id: String = PlayerStats.player_stats["player_id"]
-
+# signals
+signal command_signal(command:String)
 
 func _ready() -> void:
 	dialogo_actual = load_dialog(dialog_path)
+	command_signal.connect(ChatAppLogic._on_command_recived)
+	
+
 	
 
 func _process(_delta: float) -> void:
@@ -74,23 +78,23 @@ func load_dialog(path: String) -> Dictionary:
 
 
 func _on_option_1_pressed(btn1: Button, btn2: Button) -> void:
+	command_signal.emit(text_commands[0])
 	input_enable = true
 	current_branch = branch_1
 	btn1.disabled = true
 	btn2.disabled = true
 	btn2.text = ""
-	print(text_commands[0])
 	text_commands = []
 	print_linea()
 
 
 func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
+	command_signal.emit(text_commands[1])
 	input_enable = true
 	current_branch = branch_2
 	btn1.disabled = true
 	btn2.disabled = true
 	btn1.text = ""
-	print(text_commands[1])
 	text_commands = []
 	print_linea()
 
@@ -100,6 +104,7 @@ func text_command_assign() -> Array:
 	# asigna el contenido de text_commands si
 	if dialogo_actual.has("command"):
 		_text_command = dialogo_actual["command"]
+		# mandar senal para manjear el comportamiento segun  _text_command
 	else:
 		_text_command = []
 	return _text_command
