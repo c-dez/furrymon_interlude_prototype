@@ -16,21 +16,25 @@ var dialog_path: String = "res://dialogos/dialogos_red.json"
 
 var dialogo_actual: Dictionary = {}
 var index: int = 0
-var branch_1: String = "branch_1"
-var branch_2: String = "branch_2"
-var current_branch: String = branch_1
+
+enum BRANCHES {
+	branch_1,
+	branch_2
+}
+var current_branch: int = BRANCHES.branch_1
 var input_enable: bool = true
-var text_commands: Array
+var text_commands: Array = []
 
 var player_id: String = PlayerStats.player_stats["player_id"]
+
 # signals
-signal command_signal(command:String)
+## para cambiar atributos eje. interes + 1
+signal command_atribute_signal(command: String)
+
 
 func _ready() -> void:
 	dialogo_actual = load_dialog(dialog_path)
-	command_signal.connect(ChatAppLogic._on_command_recived)
-	
-
+	command_atribute_signal.connect(ChatAppLogic._on_command_atribute_signal)
 	
 
 func _process(_delta: float) -> void:
@@ -39,7 +43,7 @@ func _process(_delta: float) -> void:
 
 	# text_commands/ string en el dialogo para ejecutar acciones especificas
 	# cuando hya mas material pensar en como estructurar este sistema/ como estandarizarlo etc
-	# if text_commands == "if branch 2 end dialog" and current_branch == branch_2:
+	# if text_commands == "if BRANCHES 2 end dialog" and current_branch == branch_2:
 	# 	dialogo_actual = {}
 	# elif text_commands == "change gender":
 	# 	photo_frame.frame_furry.visible = true
@@ -61,13 +65,16 @@ func print_linea() -> void:
 	if index < lineas.size():
 		match personaje:
 			player_id:
+				text_command_read()
 				right_chat_box_behavior(lineas, lineas_2)
 			"opciones":
 				options_btns_behavior(lineas, lineas_2)
 			_:
 				left_chat_box_behavior(lineas, lineas_2)
 	else:
+		text_command_read()
 		advance_dialog()
+
 
 
 func load_dialog(path: String) -> Dictionary:
@@ -78,9 +85,9 @@ func load_dialog(path: String) -> Dictionary:
 
 
 func _on_option_1_pressed(btn1: Button, btn2: Button) -> void:
-	command_signal.emit(text_commands[0])
+	command_atribute_signal.emit(text_commands[0])
 	input_enable = true
-	current_branch = branch_1
+	current_branch = BRANCHES.branch_1
 	btn1.disabled = true
 	btn2.disabled = true
 	btn2.text = ""
@@ -89,9 +96,9 @@ func _on_option_1_pressed(btn1: Button, btn2: Button) -> void:
 
 
 func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
-	command_signal.emit(text_commands[1])
+	command_atribute_signal.emit(text_commands[1])
 	input_enable = true
-	current_branch = branch_2
+	current_branch = BRANCHES.branch_2
 	btn1.disabled = true
 	btn2.disabled = true
 	btn1.text = ""
@@ -142,7 +149,7 @@ func options_btns_behavior(lineas: Array, lineas_2: Array) -> void:
 func right_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	var instance: RightChatBox = right_chat.instantiate()
 	v_box_container.add_child(instance)
-	if current_branch == branch_1:
+	if current_branch == BRANCHES.branch_1:
 		instance.label.text = lineas[index]
 	else:
 		instance.label.text = lineas_2[index]
@@ -153,7 +160,7 @@ func right_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 func left_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	var instance: LeftChatBox = left_chat.instantiate()
 	v_box_container.add_child(instance)
-	if current_branch == branch_1:
+	if current_branch == BRANCHES.branch_1:
 		instance.label.text = lineas[index]
 	else:
 		instance.label.text = lineas_2[index]
@@ -170,3 +177,13 @@ func advance_dialog() -> void:
 		print("fin de dialogo")
 		dialogo_actual = {}
 		index = 0
+
+
+func text_command_read():	
+	# testing
+	# cuando solo hay un command se asume que no es para options btns y que es un command para cambiar imagen etc... por solo tener un size de ==1
+	# aqui voy a mandar una senal
+	if text_commands.size() == 1:
+		print(text_commands[0])
+
+	pass
