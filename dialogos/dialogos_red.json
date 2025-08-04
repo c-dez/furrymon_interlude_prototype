@@ -7,7 +7,7 @@
         "Porque si te gusta el fuego... ya hiciste match con el volcán equivocado, cariño."
     ],
     "command":[
-        "inicia la conversación, *Se muestra una imagén de Flarya frente al espejo con expresión retadora, una vista feroz, una sonrisa en la boca, con una mano sostiene el movil mientras la otra se mantiene apoyada en su cintura, viste un top negro que solo cubre sus avultados pechos y deja al descubierto su estomago y parte del torso, dejando ver unas curvas muy bien formadas y unos brazos muy bien tonificados, en el vidrio se ve a una luponny levantando una mancuerna y una lycanroc golpeando un saco de boxeo*"
+        "commando para cambiar imagen/aun por definir*"
     ],
     "siguiente":{
         "personaje":"opciones",

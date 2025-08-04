@@ -8,6 +8,8 @@ func _on_command_atribute_signal(command: String):
 
 func command_atribute_decisions(command: String):
 	# cambios de atributos en command deben de seguir una sintaxis exacta
+	# ejemplo: "flarya interes - 1"   (furry_name) (atribute) (operator) (value)
+
 	var text: String = command
 	var split_text: Array = text.split(" ")
 	var furry_name: String = split_text[0]

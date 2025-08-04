@@ -72,8 +72,8 @@ func print_linea() -> void:
 
 
 func load_dialog(path: String) -> Dictionary:
-	var archivo := FileAccess.open(path, FileAccess.READ)
-	var contenido: String = archivo.get_as_text()
+	var file := FileAccess.open(path, FileAccess.READ)
+	var contenido: String = file.get_as_text()
 	var datos: Dictionary = JSON.parse_string(contenido)
 	return datos
 
@@ -133,7 +133,7 @@ func options_btns_behavior(lineas: Array, lineas_2: Array) -> void:
 	v_box_container.add_child(instance)
 	instance.option_1.text = lineas[0]
 	instance.option_2.text = lineas_2[0]
-	#senales
+	# signals
 	instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1, instance.option_2))
 	instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_1, instance.option_2))
 	index += 1
@@ -172,12 +172,14 @@ func advance_dialog() -> void:
 		dialogo_actual = {}
 		index = 0
 
-
+## funcion en desarrollo nombre va a cambiar para reflejar mejor su intencion
 func text_command_read():	
 	# testing
-	# cuando solo hay un command se asume que no es para options btns y que es un command para cambiar imagen etc... por solo tener un size de ==1
-	# aqui voy a mandar una senal
+	# command en json continene un array, con  dos commandos para cada uno de los botones de opciones o puede contener solo un comando para acciones como cambiar imagen, reproducir sonidos etc... , por ahora cumple estas dos funciones:
+		# pensar si se conserva esta estructura y crear los comportamientos necesarios para manejarlas correctamente no me agrada darle dos responsabilidades, pero ya esta hecho este sistema
+		# o separar estas responsabilidades, se apega a buenas practicas pero puede volver mas complejo el sistema, por que tengo que agregar otro sistema que se encargue de cambiar imagenes
 	if text_commands.size() == 1:
+		# por ahora solo se encarga de verificar que solo exista un comando dentro de el array, si es asi se trata este comando de forma distinta a que si fuera commando para botones de opciones que contienen 2 elementos  dentro de el array
 		print(text_commands[0])
 
 	pass
