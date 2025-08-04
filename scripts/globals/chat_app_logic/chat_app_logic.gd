@@ -3,6 +3,7 @@ extends Node
 # global
 # se hace cargo de ejecutar acciones segun el command de json
 func _on_command_atribute_signal(command: String):
+	# signal recibida desde "chat_app.gd"
 	command_atribute_decisions(command)
 
 

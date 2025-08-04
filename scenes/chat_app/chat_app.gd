@@ -35,6 +35,7 @@ signal command_atribute_signal(command: String)
 
 func _ready() -> void:
 	dialogo_actual = load_dialog(dialog_path)
+	# signal emitida hacia:
 	command_atribute_signal.connect(ChatAppLogic._on_command_atribute_signal)
 	
 
