@@ -12,6 +12,7 @@ const left_chat: Resource = preload("res://scenes/chat_app/chat_boxes/left/left_
 const right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/right_chat_box.tscn")
 const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options_btns/options_btns.tscn")
 
+#referencia a el dialogo
 var dialog_path: String = "res://dialogos/dialogos_red.json"
 
 var dialogo_actual: Dictionary = {}
