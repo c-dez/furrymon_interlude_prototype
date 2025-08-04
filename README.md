@@ -12,6 +12,7 @@
     - cambiar imagenes, reproducir sonidos etc
 - implementar sistema de save/load game
 - solo un sistema( chat_app) ha sido creado hasta ahora en el futuro necesito un manager para los distintos sistemas
+- indicacion visual de que el dialogo ha terminado
 
 # me gustaria:
 - estilizar dialogo, resaltar, cambiar color de palabras
