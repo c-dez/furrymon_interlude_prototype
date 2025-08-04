@@ -1,3 +1,12 @@
+# Descripcion:
+- Sistema de dialogo tipo chat
+- muestra dialogo segun quien es el que habla
+- muestra imagen
+- hay botones para dos opciones que el jugador puede elegir
+- el sistema de dialogos toma deciciones por medio de commands (strings)
+    - que pasa al elegir un boton de opcion
+    - cambiar de imagen
+
 # por hacer:
 - estandarizar sintaxis de commnads
     - cambiar imagenes, reproducir sonidos etc
