@@ -22,6 +22,7 @@ run/size/viewport_width=960
 
 PlayerStats="*res://scripts/globals/player_stats/player_stats.gd"
 ChatAppLogic="*res://scripts/globals/chat_app_logic/chat_app_logic.gd"
+PortraitsPaths="*res://scripts/globals/DB/portraits_paths/portraits_paths.gd"
 
 [display]
 

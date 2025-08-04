@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh1rf7xokgmkr"]
+[gd_scene load_steps=3 format=3 uid="uid://dh1rf7xokgmkr"]
 
 [ext_resource type="Script" uid="uid://djvxhady1sign" path="res://scenes/chat_app/photo_frame/photo_frame.gd" id="1_to7id"]
-[ext_resource type="Texture2D" uid="uid://bie3fbw5s3m81" path="res://nsfw/photos/malin-falch-potionseller-small.jpg" id="1_wstyq"]
 [ext_resource type="Texture2D" uid="uid://t14t8joim7tg" path="res://nsfw/photos/furry1_test.jpg" id="2_to7id"]
 
 [node name="PhotoFrame" type="Control"]
@@ -23,14 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Knight" type="Sprite2D" parent="SubViewportContainer"]
-position = Vector2(-92, -15)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_wstyq")
-centered = false
-
-[node name="Furry" type="Sprite2D" parent="SubViewportContainer"]
-visible = false
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer"]
 position = Vector2(-92, -15)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_to7id")
