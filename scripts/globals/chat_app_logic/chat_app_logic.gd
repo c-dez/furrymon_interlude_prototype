@@ -38,6 +38,11 @@ func command_atribute_decisions(command: String):
 	var atribute: String = split_text[1]
 	var operator: String = split_text[2]
 	var value: int = split_text[3] as int
+	# notificar error de sintaxis en command
+	if split_text.size() != 4:
+		print("command error de sintaxis: ", split_text)
+		return
+
 	match furry_name:
 		"flarya":
 			if atribute == "interes":
