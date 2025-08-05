@@ -32,12 +32,15 @@ var player_id: String = PlayerStats.player_stats["player_id"]
 # signals
 ## para cambiar atributos eje. interes + 1
 signal command_atribute_signal(command: String)
+# single command
+signal command_single_signal(command:String,photo_frame:PhotoFrame)
 
 
 func _ready() -> void:
 	dialogo_actual = load_dialog(dialog_path)
 	# signal emitida hacia:
 	command_atribute_signal.connect(ChatAppLogic._on_command_atribute_signal)
+	command_single_signal.connect(ChatAppLogic._on_command_single_signal)
 	
 
 func _process(_delta: float) -> void:
@@ -182,6 +185,8 @@ func text_command_read():
 		# o separar estas responsabilidades, se apega a buenas practicas pero puede volver mas complejo el sistema, por que tengo que agregar otro sistema que se encargue de cambiar imagenes
 	if text_commands.size() == 1:
 		# por ahora solo se encarga de verificar que solo exista un comando dentro de el array, si es asi se trata este comando de forma distinta a que si fuera commando para botones de opciones que contienen 2 elementos  dentro de el array
-		print(text_commands[0])
+		# print(text_commands[0])
+		command_single_signal.emit(text_commands[0],photo_frame)
+		# photo_frame.sprite_texture_path = ChatAppLogic.sprite_path
 
 	pass
