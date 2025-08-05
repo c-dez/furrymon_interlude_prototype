@@ -37,7 +37,7 @@ func command_atribute_decisions(command: String):
 	var furry_name: String = split_text[0]
 	var atribute: String = split_text[1]
 	var operator: String = split_text[2]
-	var value: int = split_text[3] as int
+	var value: int = split_text[3].to_int()
 	# notificar error de sintaxis en command
 	if split_text.size() != 4:
 		print("command error de sintaxis: ", split_text)
@@ -53,4 +53,5 @@ func command_atribute_decisions(command: String):
 					PlayerStats.player_stats["flarya"]["interes"] -= value
 					print(PlayerStats.player_stats["flarya"]["interes"])
 		_:
+			print(furry_name, "no reconocido")
 			pass
