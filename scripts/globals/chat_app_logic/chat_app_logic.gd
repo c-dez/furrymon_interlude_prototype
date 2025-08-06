@@ -32,6 +32,7 @@ func command_single_decision(command: String, photo_frame: PhotoFrame) -> void:
 func command_atribute_decisions(command: String):
 	# cambios de atributos en command deben de seguir una sintaxis exacta
 	# ejemplo: "flarya interes - 1" ==  (furry_name) (atribute) (operator) (value)
+	#similar a un comando de terminal
 	var text: String = command
 	var split_text: Array = text.split(" ")
 	var furry_name: String = split_text[0]
@@ -40,10 +41,12 @@ func command_atribute_decisions(command: String):
 	var value: int = split_text[3].to_int()
 	# notificar error de sintaxis en command
 	if split_text.size() != 4:
+		# checa si se cumple con el numero de comandos, por ahora solo 4
 		print("command error de sintaxis: ", split_text)
 		return
 
 	match furry_name:
+		#base de como se evaluan comandos, falta cambiarlo a codigo mas limpio
 		"flarya":
 			if atribute == "interes":
 				if operator == "+":
@@ -52,6 +55,7 @@ func command_atribute_decisions(command: String):
 				elif operator == "-":
 					PlayerStats.player_stats["flarya"]["interes"] -= value
 					print(PlayerStats.player_stats["flarya"]["interes"])
+			else:
+				print("atribute: ",atribute," no reconocido en command: ", split_text)
 		_:
 			print(furry_name, "no reconocido")
-			pass

@@ -4,6 +4,7 @@
 - muestra imagen
 - hay botones para dos opciones que el jugador puede elegir
 - el sistema de dialogos toma deciciones por medio de commands (strings)
+    - se creo un sistema de commandos por medio de un string, este string se declara en el dialogo.json dentro de key "commands":y se divide y cada parte de el es evaluada en un match para realizar acciones
     - que pasa al elegir un boton de opcion
     - cambiar de imagen
 
