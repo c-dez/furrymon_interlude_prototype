@@ -1,3 +1,5 @@
+# carpeta photos se debe de agregar a res://nsfw
+# dialogo se avanza con tecla "space" o "enter"
 # Descripcion:
 - Sistema de dialogo tipo chat
 - muestra dialogo segun quien es el que habla
