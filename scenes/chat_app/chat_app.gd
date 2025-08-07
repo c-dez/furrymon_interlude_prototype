@@ -33,7 +33,7 @@ var player_id: String = PlayerStats.player_stats["player_id"]
 ## para cambiar atributos eje. interes + 1
 signal command_atribute_signal(command: String)
 # single command
-signal command_single_signal(command:String,photo_frame:PhotoFrame)
+signal command_single_signal(command: String, photo_frame: PhotoFrame)
 
 
 func _ready() -> void:
@@ -65,14 +65,15 @@ func print_linea() -> void:
 	if index < lineas.size():
 		match personaje:
 			player_id:
-				text_command_read()
 				right_chat_box_behavior(lineas, lineas_2)
+				text_command_read()
 			"opciones":
 				options_btns_behavior(lineas, lineas_2)
 			_:
 				left_chat_box_behavior(lineas, lineas_2)
+				text_command_read()
 	else:
-		text_command_read()
+		# text_command_read()
 		advance_dialog()
 
 
@@ -178,7 +179,7 @@ func advance_dialog() -> void:
 		index = 0
 
 ## funcion en desarrollo nombre va a cambiar para reflejar mejor su intencion
-func text_command_read():	
+func text_command_read():
 	# testing
 	# command en json continene un array, con  dos commandos para cada uno de los botones de opciones o puede contener solo un comando para acciones como cambiar imagen, reproducir sonidos etc... , por ahora cumple estas dos funciones:
 		# pensar si se conserva esta estructura y crear los comportamientos necesarios para manejarlas correctamente no me agrada darle dos responsabilidades, pero ya esta hecho este sistema
@@ -186,7 +187,7 @@ func text_command_read():
 	if text_commands.size() == 1:
 		# por ahora solo se encarga de verificar que solo exista un comando dentro de el array, si es asi se trata este comando de forma distinta a que si fuera commando para botones de opciones que contienen 2 elementos  dentro de el array
 		# print(text_commands[0])
-		command_single_signal.emit(text_commands[0],photo_frame)
+		command_single_signal.emit(text_commands[0], photo_frame)
 		# photo_frame.sprite_texture_path = ChatAppLogic.sprite_path
 
 	pass
