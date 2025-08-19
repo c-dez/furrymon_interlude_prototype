@@ -199,4 +199,5 @@ func text_command_read():
 		command_single_signal.emit(text_commands[0], photo_frame)
 		# photo_frame.sprite_texture_path = ChatAppLogic.sprite_path
 
+	# todo: se repite el comando cuando hay varias lineas de dialogo solo se debe de ejecutar una vez al inicio, debe ser un impacto a performance minimo pero no hay necesidad de repetir esta accion
 	pass

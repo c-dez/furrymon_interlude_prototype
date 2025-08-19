@@ -3,13 +3,14 @@ extends Node
 # global
 # se hace cargo de ejecutar acciones segun el command de json
 
+var image_scale := Vector2(0.3, 0.3)
 
 func _on_command_atribute_signal(command: String) -> void:
 	# signal recibida desde "chat_app.gd"
 	command_atribute_decisions(command)
 	
 
-func _on_command_single_signal(command, photo_frame):
+func _on_command_single_signal(command: String, photo_frame: PhotoFrame) -> void:
 	# signal recibida desde "chat_app.gd"
 	command_single_decision(command, photo_frame)
 
@@ -30,6 +31,7 @@ func command_single_decision(command: String, photo_frame: PhotoFrame) -> void:
 
 func create_image_sprite(photo_frame: PhotoFrame, image_resource: Resource) -> void:
 	var image: Resource = image_resource
+	# se asegura de que no exista mas de un child
 	if photo_frame.view_port.get_child_count() > 0:
 		for i in range(photo_frame.view_port.get_child_count()):
 			photo_frame.view_port.get_child(i).queue_free()
@@ -38,7 +40,7 @@ func create_image_sprite(photo_frame: PhotoFrame, image_resource: Resource) -> v
 	photo_frame.view_port.add_child(new_sprite)
 	new_sprite.texture = image
 	new_sprite.centered = false
-	new_sprite.scale = Vector2(0.3, 0.3)
+	new_sprite.scale = image_scale
 
 
 func command_atribute_decisions(command: String):
