@@ -1,3 +1,4 @@
+## se encarga de 
 class_name PhotoFrame
 extends Control
 

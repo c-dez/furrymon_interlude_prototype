@@ -1,6 +1,6 @@
+## este nodo se encarga de crear las cajas de texto, su contenido y scroll
 class_name ChatApp
 extends Control
-# este nodo se encarga de crear las cajas de texto, su contenido y scroll
 
 
 @onready var scroll_container: ScrollContainer = get_node("ScrollContainer")
@@ -12,86 +12,86 @@ const left_chat: Resource = preload("res://scenes/chat_app/chat_boxes/left/left_
 const right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/right_chat_box.tscn")
 const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options_btns/options_btns.tscn")
 
-#referencia a el dialogo
-var dialog_path: String = ""
-## dialogo json
+## almacena el archivo json de el dialogo
 @export var dialog_json: JSON
-
-
+## almacena el dialogo json en un diccionario
 var dialogo_actual: Dictionary = {}
 var index: int = 0
-
-
+## enum para referenciar los branches de dialogo
 enum BRANCHES {
 	branch_1,
 	branch_2
 }
+## almacena el branch de dialogo actual
 var current_branch: int = BRANCHES.branch_1
+## bloquea el input de el usuario al mostrar los botones de opciones
 var input_enable: bool = true
+## almacena los comandos ej. atributo +1, cambiar imagen etc
 var text_commands: Array = []
-
 var player_id: String = PlayerStats.player_stats["player_id"]
 
 # signals
 ## para cambiar atributos eje. interes + 1
 signal command_atribute_signal(command: String)
-# single command
+## para dar comandos eje cambiar imagen, reproducir sonido etc
 signal command_single_signal(command: String, photo_frame: PhotoFrame)
 
 
 func _ready() -> void:
-	dialog_path = get_dialog_json_path()
-	dialogo_actual = load_dialog(dialog_path)
+	# dialog_path = get_dialog_json_path()
+	dialogo_actual = load_dialog(get_dialog_json_path())
 	# signal emitida hacia:
 	command_atribute_signal.connect(ChatAppLogic._on_command_atribute_signal)
 	command_single_signal.connect(ChatAppLogic._on_command_single_signal)
 		
 	
-
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and input_enable:
 		print_linea()
 
-func get_dialog_json_path()->String:
-	if dialog_json:
-		return dialog_json.resource_path
-	return ""
 
-
+## Se encarga de ir leyendo y decidiendo que lineas de dialogo y donde se van a "imprimir", o si es un command ejecutar su accion
 func print_linea() -> void:
-	# se encarga de ir leyendo y decidiendo que lineas de dialogo y donde se van a "imprimir"
 	if dialogo_actual == {}:
-		# cuando termina el dialogo
 		print("dialogo empty")
 		return
 
 	var personaje: String = dialogo_actual["personaje"]
+	var opciones: String = "opciones" # se refiere a los commands a ejecutar
 	var lineas: Array = dialogo_actual["lineas"]
 	var lineas_2: Array = []
 
-	text_commands = text_command_assign()
-	lineas_2 = lineas_2_assign()
-
+	text_commands = get_text_command()
+	lineas_2 = get_lineas_2()
 	if index < lineas.size():
 		match personaje:
 			player_id:
 				right_chat_box_behavior(lineas, lineas_2)
 				text_command_read()
-			"opciones":
+			opciones:
 				options_btns_behavior(lineas, lineas_2)
 			_:
 				left_chat_box_behavior(lineas, lineas_2)
 				text_command_read()
 	else:
-		# text_command_read()
 		advance_dialog()
 
 
+## Obtiene el path de el json y lo regresa como un string
+func get_dialog_json_path() -> String:
+	return dialog_json.resource_path if dialog_json else ""
+
+
+## Regresa un diccionario segun el string path, si el string esta vacio regresa un diccionario vacio e imprime el error
 func load_dialog(path: String) -> Dictionary:
-	var file := FileAccess.open(path, FileAccess.READ)
-	var contenido: String = file.get_as_text()
-	var datos: Dictionary = JSON.parse_string(contenido)
-	return datos
+	if !path:
+		printerr("Path a Dialogo json vacio")
+		return {}
+	else:
+		var file := FileAccess.open(path, FileAccess.READ)
+		var contenido: String = file.get_as_text()
+		var datos: Dictionary = JSON.parse_string(contenido)
+		return datos
 
 
 func _on_option_1_pressed(btn1: Button, btn2: Button) -> void:
@@ -115,19 +115,17 @@ func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
 	text_commands = []
 	print_linea()
 
-
-func text_command_assign() -> Array:
+## si existe command, esta funcion se encarga de extraerlo y regresarlo en un array, si no existe regresa un array vacio
+func get_text_command() -> Array:
 	var _text_command: Array
-	# asigna el contenido de text_commands si
 	if dialogo_actual.has("command"):
 		_text_command = dialogo_actual["command"]
-		# mandar senal para manjear el comportamiento segun  _text_command
 	else:
 		_text_command = []
 	return _text_command
 
-
-func lineas_2_assign() -> Array:
+## lee el dialogo actual, si existe key lineas_2 regresa un array con su contenido, si no un array vacio
+func get_lineas_2() -> Array:
 	var _lineas_2: Array
 	if dialogo_actual.has("lineas_2"):
 		if index < dialogo_actual["lineas_2"].size():
@@ -135,14 +133,14 @@ func lineas_2_assign() -> Array:
 		else:
 			_lineas_2 = []
 	return _lineas_2
-	
 
+
+## se asegura de que la nueva caja de texto instanceada se muestre al bajar el scroll al final
 func scroll_to_bottom(instance: Node) -> void:
-	# asegurarse que el scroll se baje para que el nuevo nodo sea visible
 	await get_tree().process_frame
 	scroll_container.ensure_control_visible(instance)
 
-
+##
 func options_btns_behavior(lineas: Array, lineas_2: Array) -> void:
 	input_enable = false
 	var instance: OptionsBtns = options_btns.instantiate()
@@ -155,7 +153,7 @@ func options_btns_behavior(lineas: Array, lineas_2: Array) -> void:
 	index += 1
 	scroll_to_bottom(instance)
 
-
+## caja de texto de lado derecho, esta es la caja de texto de el jugador
 func right_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	var instance: RightChatBox = right_chat.instantiate()
 	v_box_container.add_child(instance)
@@ -166,7 +164,7 @@ func right_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	index += 1
 	scroll_to_bottom(instance)
 
-
+## caja de texto izquierda, esta es la caja de texto de con quien se esta hablando
 func left_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	var instance: LeftChatBox = left_chat.instantiate()
 	v_box_container.add_child(instance)
@@ -187,6 +185,7 @@ func advance_dialog() -> void:
 		print("fin de dialogo")
 		dialogo_actual = {}
 		index = 0
+
 
 ## funcion en desarrollo nombre va a cambiar para reflejar mejor su intencion
 func text_command_read():
