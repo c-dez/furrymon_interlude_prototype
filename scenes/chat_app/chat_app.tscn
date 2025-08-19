@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b350hvy60n7fg"]
+[gd_scene load_steps=3 format=3 uid="uid://b350hvy60n7fg"]
 
 [ext_resource type="Script" uid="uid://b7y1doyos3u6x" path="res://scenes/chat_app/chat_app.gd" id="1_td75o"]
+[ext_resource type="JSON" path="res://dialogos/dialogos_red.json" id="2_5aylu"]
 
 [node name="ChatApp" type="Control"]
 layout_direction = 1
@@ -11,6 +12,7 @@ anchor_right = 0.8
 anchor_bottom = 0.9
 grow_vertical = 2
 script = ExtResource("1_td75o")
+dialog_json = ExtResource("2_5aylu")
 
 [node name="BackGround" type="ColorRect" parent="."]
 layout_mode = 1

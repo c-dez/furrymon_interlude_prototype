@@ -13,7 +13,10 @@ const right_chat: Resource = preload("res://scenes/chat_app/chat_boxes/right/rig
 const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options_btns/options_btns.tscn")
 
 #referencia a el dialogo
-var dialog_path: String = "res://dialogos/dialogos_red.json"
+var dialog_path: String = ""
+## dialogo json
+@export var dialog_json: JSON
+
 
 var dialogo_actual: Dictionary = {}
 var index: int = 0
@@ -37,15 +40,22 @@ signal command_single_signal(command: String, photo_frame: PhotoFrame)
 
 
 func _ready() -> void:
+	dialog_path = get_dialog_json_path()
 	dialogo_actual = load_dialog(dialog_path)
 	# signal emitida hacia:
 	command_atribute_signal.connect(ChatAppLogic._on_command_atribute_signal)
 	command_single_signal.connect(ChatAppLogic._on_command_single_signal)
+		
 	
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and input_enable:
 		print_linea()
+
+func get_dialog_json_path()->String:
+	if dialog_json:
+		return dialog_json.resource_path
+	return ""
 
 
 func print_linea() -> void:
