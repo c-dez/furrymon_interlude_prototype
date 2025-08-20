@@ -4,9 +4,8 @@ extends Node
 
 const SAVE_PATH: String = "user://game_save_file.save"
 var game_save_file: Dictionary = {
-	"save_1": {
-	"player_stats": PlayerStats.player_stats,
-	},
+	"save_1": PlayerStats._player_stats,
+	
 	"save_2": {},
 	"save_3": {}
 }
