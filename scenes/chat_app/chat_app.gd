@@ -16,7 +16,8 @@ const options_btns: Resource = preload("res://scenes/chat_app/chat_boxes/options
 @export var dialog_json: JSON
 ## almacena el dialogo json en un diccionario
 var dialogo_actual: Dictionary = {}
-var index: int = 0
+var _index: int = 0
+
 ## enum para referenciar los branches de dialogo
 enum BRANCHES {
 	branch_1,
@@ -28,7 +29,6 @@ var current_branch: int = BRANCHES.branch_1
 var input_enable: bool = true
 ## almacena los comandos ej. atributo +1, cambiar imagen etc
 var text_commands: Array = []
-var player_id: String = PlayerStats.player_stats["player_id"]
 
 # signals
 ## para cambiar atributos eje. interes + 1
@@ -59,11 +59,12 @@ func print_linea() -> void:
 	var personaje: String = dialogo_actual["personaje"]
 	var opciones: String = "opciones" # se refiere a los commands a ejecutar
 	var lineas: Array = dialogo_actual["lineas"]
-	var lineas_2: Array = []
+	var lineas_2: Array = get_lineas_2()
+	var player_id: String = PlayerStats.get_player_id()
 
 	text_commands = get_text_command()
-	lineas_2 = get_lineas_2()
-	if index < lineas.size():
+	# lineas_2 = get_lineas_2()
+	if _index < lineas.size():
 		match personaje:
 			player_id:
 				right_chat_box_behavior(lineas, lineas_2)
@@ -96,24 +97,25 @@ func load_dialog(path: String) -> Dictionary:
 
 func _on_option_1_pressed(btn1: Button, btn2: Button) -> void:
 	command_atribute_signal.emit(text_commands[0])
-	input_enable = true
 	current_branch = BRANCHES.branch_1
-	btn1.disabled = true
-	btn2.disabled = true
 	btn2.text = ""
-	text_commands = []
-	print_linea()
-
+	_option_btn_shared_behavior(btn1, btn2)
+	
 
 func _on_option_2_pressed(btn1: Button, btn2: Button) -> void:
 	command_atribute_signal.emit(text_commands[1])
-	input_enable = true
 	current_branch = BRANCHES.branch_2
+	btn1.text = ""
+	_option_btn_shared_behavior(btn1, btn2)
+
+
+func _option_btn_shared_behavior(btn1: Button, btn2: Button) -> void:
+	input_enable = true
 	btn1.disabled = true
 	btn2.disabled = true
-	btn1.text = ""
 	text_commands = []
 	print_linea()
+
 
 ## si existe command, esta funcion se encarga de extraerlo y regresarlo en un array, si no existe regresa un array vacio
 func get_text_command() -> Array:
@@ -128,7 +130,7 @@ func get_text_command() -> Array:
 func get_lineas_2() -> Array:
 	var _lineas_2: Array
 	if dialogo_actual.has("lineas_2"):
-		if index < dialogo_actual["lineas_2"].size():
+		if _index < dialogo_actual["lineas_2"].size():
 			_lineas_2 = dialogo_actual["lineas_2"]
 		else:
 			_lineas_2 = []
@@ -150,7 +152,7 @@ func options_btns_behavior(lineas: Array, lineas_2: Array) -> void:
 	# signals
 	instance.option_1.connect("pressed", Callable(self, "_on_option_1_pressed").bind(instance.option_1, instance.option_2))
 	instance.option_2.connect("pressed", Callable(self, "_on_option_2_pressed").bind(instance.option_1, instance.option_2))
-	index += 1
+	_index += 1
 	scroll_to_bottom(instance)
 
 ## caja de texto de lado derecho, esta es la caja de texto de el jugador
@@ -158,10 +160,10 @@ func right_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	var instance: RightChatBox = right_chat.instantiate()
 	v_box_container.add_child(instance)
 	if current_branch == BRANCHES.branch_1:
-		instance.label.text = lineas[index]
+		instance.label.text = lineas[_index]
 	else:
-		instance.label.text = lineas_2[index]
-	index += 1
+		instance.label.text = lineas_2[_index]
+	_index += 1
 	scroll_to_bottom(instance)
 
 ## caja de texto izquierda, esta es la caja de texto de con quien se esta hablando
@@ -169,22 +171,22 @@ func left_chat_box_behavior(lineas: Array, lineas_2: Array) -> void:
 	var instance: LeftChatBox = left_chat.instantiate()
 	v_box_container.add_child(instance)
 	if current_branch == BRANCHES.branch_1:
-		instance.label.text = lineas[index]
+		instance.label.text = lineas[_index]
 	else:
-		instance.label.text = lineas_2[index]
-	index += 1
+		instance.label.text = lineas_2[_index]
+	_index += 1
 	scroll_to_bottom(instance)
 
 
 func advance_dialog() -> void:
 	if dialogo_actual.has("siguiente"):
 		dialogo_actual = dialogo_actual["siguiente"]
-		index = 0
+		_index = 0
 		print_linea()
 	else:
 		print("fin de dialogo")
 		dialogo_actual = {}
-		index = 0
+		_index = 0
 
 
 ## funcion en desarrollo nombre va a cambiar para reflejar mejor su intencion

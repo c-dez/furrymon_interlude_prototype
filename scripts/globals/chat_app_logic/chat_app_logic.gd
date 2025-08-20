@@ -24,7 +24,6 @@ func command_single_decision(command: String, photo_frame: PhotoFrame) -> void:
 			create_image_sprite(photo_frame, PortraitsPaths.flarya_1)
 		"flarya_2":
 			create_image_sprite(photo_frame, PortraitsPaths.flarya_2)
-			
 		_:
 			pass
 
@@ -44,32 +43,47 @@ func create_image_sprite(photo_frame: PhotoFrame, image_resource: Resource) -> v
 
 
 func command_atribute_decisions(command: String):
-	# cambios de atributos en command deben de seguir una sintaxis exacta
-	# ejemplo: "flarya interes - 1" ==  (furry_name) (atribute) (operator) (value)
-	#similar a un comando de terminal
-	var text: String = command
-	var split_text: Array = text.split(" ")
-	var furry_name: String = split_text[0]
-	var atribute: String = split_text[1]
-	var operator: String = split_text[2]
-	var value: int = split_text[3].to_int()
-	# notificar error de sintaxis en command
-	if split_text.size() != 4:
-		# checa si se cumple con el numero de comandos, por ahora solo 4
-		print("command error de sintaxis: ", split_text)
+	# command en dialogo debe de seguir sintaxis exacta
+	# ejemplo: "flarya interes -1" ==  (furry_name) (atribute) (value)
+	var split_text: Array = command.split(" ")
+
+	
+	if split_text.size() != 3:
+		# checa si se cumple con el numero de comandos, por ahora solo 3
+		printerr("command error de sintaxis: ", split_text)
+		_print_syntaxis_example()
 		return
 
+	var furry_name: String = split_text[0]
+	var atribute: String = split_text[1]
+	var value_str: String = split_text[2]
+
+	if not value_str.is_valid_int():
+		printerr("value no es int ", value_str)
+		_print_syntaxis_example()
+		return
+
+	var value: int = value_str.to_int()
+
+	const INTERES: String = "interes"
+	const FLARYA: String = "flarya"
 	match furry_name:
-		#base de como se evaluan comandos, falta cambiarlo a codigo mas limpio
-		"flarya":
-			if atribute == "interes":
-				if operator == "+":
-					PlayerStats.player_stats["flarya"]["interes"] += value
-					print(PlayerStats.player_stats["flarya"]["interes"])
-				elif operator == "-":
-					PlayerStats.player_stats["flarya"]["interes"] -= value
-					print(PlayerStats.player_stats["flarya"]["interes"])
+		# base de como se evaluan comandos
+		FLARYA:
+			if atribute == INTERES:
+				PlayerStats.set_atribute(value, furry_name, atribute)
+				print(PlayerStats.get_atribute(furry_name, atribute))
 			else:
-				print("atribute: ", atribute, " no reconocido en command: ", split_text)
+				printerr("atribute: ", atribute, " no reconocido en command: ", split_text)
+				_print_syntaxis_example()
 		_:
-			print(furry_name, "no reconocido")
+			printerr(furry_name, "no reconocido")
+			_print_syntaxis_example()
+
+
+
+
+
+# debug
+func _print_syntaxis_example() -> void:
+		printerr("sintaxis es: flarya interes -1 (furry_name) (atribute) (value)")

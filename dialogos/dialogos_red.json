@@ -18,8 +18,8 @@
 			"Si me vas a poner a prueba..."
 		],
 		"command": [
-			"flarya interes - 1",
-			"flarya interes + 2"
+			"flarya interes -10",
+			"flarya interes +2"
 		],
 		"siguiente": {
 			"personaje": "Player",
