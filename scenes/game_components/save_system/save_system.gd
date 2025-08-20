@@ -21,5 +21,6 @@ func load_game() -> void:
 	if FileAccess.file_exists(SAVE_PATH):
 		var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 		game_save_file = file.get_var()
+		PlayerStats._player_stats = game_save_file["save_1"]
 		print("game loaded")
 
